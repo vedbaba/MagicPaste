@@ -1,0 +1,2 @@
+# MagicPaste
+MagicPaste
