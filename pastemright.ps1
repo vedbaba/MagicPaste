@@ -24,6 +24,7 @@ Start-Sleep -Milliseconds $startupDelay
 Function Get-CursorClick
 {
     $click = [System.Windows.Forms.UserControl]::MouseButtons
+    
     return $click
 }
 
@@ -66,6 +67,8 @@ function Send-SpecialKey {
         '=' { [System.Windows.Forms.SendKeys]::SendWait('{=}') } # Equals
         '_' { [System.Windows.Forms.SendKeys]::SendWait('{_}') } # Underscore
         '-' { [System.Windows.Forms.SendKeys]::SendWait('{-}') } # Hyphen
+        '}}' { [System.Windows.Forms.SendKeys]::SendWait('}}}}') } # }}
+        '{{' { [System.Windows.Forms.SendKeys]::SendWait('{{{{') } # }}
         default { [System.Windows.Forms.SendKeys]::SendWait($key) } # Default handling for other keys
     }
 }
@@ -88,26 +91,25 @@ function Send-Keys {
         [System.Windows.Forms.SendKeys]::SendWait("{ENTER}")
     }
 }
- 
+$count=0
 while($true)
 {
     $event = Get-CursorClick
+    #Write-Host $event
     if($event -ne "None")
     {
         if ($event -eq "Left" ) {
-         
+            $count ++
+            if ( $count -ge 2)
+            {
+                $count = 0
+                Send-Keys $textToType 
+                Write-Host "double left mouse button pressed!"
+                break
+            }
         }
-        else
-        {
-            Send-Keys $textToType        
-            Write-Host "Right"
-            break
-        }
-
-       
-       
     }
- 
+    Start-Sleep -Milliseconds 50
 }
 
 
