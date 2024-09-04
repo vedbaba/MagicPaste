@@ -14,20 +14,12 @@ else {
     $textToType = Get-Clipboard
 }
 
-$typingDelay = 0  # Delay between keystrokes in milliseconds
-$startupDelay = 3000  # Initial delay before typing starts in milliseconds
- 
-# Wait for a specified time to allow user to switch to the target application
-#Write-Host "You have $(($startupDelay / 1000)) seconds to focus on the target application..."
-#Start-Sleep -Milliseconds $startupDelay
-
 Function Get-CursorClick
 {
     $click = [System.Windows.Forms.UserControl]::MouseButtons
     
     return $click
 }
-
 
 function Send-SpecialKey {
     param (
