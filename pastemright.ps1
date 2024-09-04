@@ -18,8 +18,8 @@ $typingDelay = 0  # Delay between keystrokes in milliseconds
 $startupDelay = 3000  # Initial delay before typing starts in milliseconds
  
 # Wait for a specified time to allow user to switch to the target application
-Write-Host "You have $(($startupDelay / 1000)) seconds to focus on the target application..."
-Start-Sleep -Milliseconds $startupDelay
+#Write-Host "You have $(($startupDelay / 1000)) seconds to focus on the target application..."
+#Start-Sleep -Milliseconds $startupDelay
 
 Function Get-CursorClick
 {
@@ -92,24 +92,22 @@ function Send-Keys {
     }
 }
 $count=0
+$reset=0
 while($true)
 {
     $event = Get-CursorClick
-    #Write-Host $event
     if($event -ne "None")
     {
         if ($event -eq "Left" ) {
-            $count ++
-            if ( $count -ge 2)
+            if ( $count -eq 2)
             {
                 $count = 0
                 Send-Keys $textToType 
-                Write-Host "double left mouse button pressed!"
-                break
             }
+            $count ++
         }
     }
-    Start-Sleep -Milliseconds 50
+    Start-Sleep -Milliseconds 100
 }
 
 
