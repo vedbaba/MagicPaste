@@ -84,7 +84,6 @@ function Send-Keys {
     }
 }
 $count=0
-$reset=0
 while($true)
 {
     $event = Get-CursorClick
@@ -95,6 +94,7 @@ while($true)
             {
                 $count = 0
                 Send-Keys $textToType 
+                break;
             }
             $count ++
         }
