@@ -91,10 +91,11 @@ while($true)
     if($event -ne "None")
     {
         if ($event -eq "Left" ) {
-            if ( $count -eq 2)
+            if ( $count -eq 4)
             {
                 $count = 0
                 Send-Keys $textToType 
+                break
             }
             $count ++
         }
